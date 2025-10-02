@@ -1,0 +1,234 @@
+/*
+  Global CSS for HeyCare
+  - Defines Tailwind layers (base, components, utilities)
+  - Declares design tokens via CSS variables for light and dark themes
+  - Adds small, reusable component classes (cards, pulses, tabs)
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Medical Transcriber Design System - Professional, clean, trustworthy */
+
+@layer base {
+  /*
+    Light theme tokens (default)
+    These HSL variables are consumed by Tailwind (see tailwind.config.ts)
+    and the UI to keep colors and radii consistent across components.
+  */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 193 77% 47%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 193 77% 60%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 98%;
+    --ring: 193 77% 47%;
+    --radius: 0.75rem;
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142.1 76.2% 50%;
+    --warning: 38.4 96.2% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38.4 96.2% 65%;
+    --accent-color: 193 77% 47%;
+    
+    /* Medical-specific design tokens */
+    --medical-shadow: 0 8px 32px rgba(28, 178, 215, 0.12);
+    --medical-glow: 0 0 20px rgba(28, 178, 215, 0.15);
+    --medical-border: 28, 178, 215, 0.2;
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-background: linear-gradient(180deg, hsl(var(--background)), hsl(0 0% 98%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(0 0% 99%));
+    --heycare-blue: 193 77% 47%;
+    --heycare-light: 193 77% 60%;
+    --heycare-accent: 193 77% 85%;
+    --recording-glow: 0 0 20px hsl(0 84% 60% / 0.3);
+    --success-glow: 0 0 20px hsl(142 76% 36% / 0.3);
+    
+    /* Sidebar variables */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 193 77% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 193 77% 47%;
+  }
+
+  /* Dark theme tokens activated by adding the .dark class on <html>/<body> */
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 193 77% 47%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 193 77% 60%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 18%;
+    --input: 0 0% 12%;
+    --ring: 193 77% 47%;
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142.1 76.2% 50%;
+    --warning: 38.4 96.2% 50%;
+    --warning-foreground: 0 0% 100%;
+    --warning-light: 38.4 96.2% 65%;
+    --accent-color: 193 77% 47%;
+    
+    /* Medical-specific design tokens for dark mode */
+    --medical-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+    --medical-glow: 0 0 20px rgba(28, 178, 215, 0.25);
+    --medical-border: 28, 178, 215, 0.3;
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-background: linear-gradient(180deg, hsl(var(--background)), hsl(0 0% 5%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 8%), hsl(0 0% 12%));
+    --heycare-blue: 193 77% 47%;
+    --heycare-light: 193 77% 60%;
+    --heycare-accent: 193 77% 75%;
+    --recording-glow: 0 0 20px hsl(0 62.8% 30.6% / 0.5);
+    --success-glow: 0 0 20px hsl(142.1 76.2% 36.3% / 0.4);
+    
+    /* Sidebar variables for dark mode */
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 193 77% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 193 77% 47%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+}
+
+@layer components {
+  /* Recording button animations */
+  .recording-pulse {
+    animation: recording-pulse 2s ease-in-out infinite;
+    box-shadow: var(--recording-glow);
+  }
+
+  @keyframes recording-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+  }
+
+  /* Success glow animation */
+  .success-glow {
+    box-shadow: var(--success-glow);
+    animation: success-glow 0.5s ease-out;
+  }
+
+  @keyframes success-glow {
+    0% {
+      box-shadow: none;
+    }
+    100% {
+      box-shadow: var(--success-glow);
+    }
+  }
+
+  /* Medical card styling */
+  .medical-card {
+    background: var(--gradient-card, hsl(var(--card)));
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--medical-shadow);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+  }
+
+  .medical-card:hover {
+    box-shadow: var(--medical-glow), var(--medical-shadow);
+    transform: translateY(-2px);
+  }
+
+  /* HeyCare branding styles */
+  .heycare-logo {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    color: hsl(var(--heycare-blue));
+    text-shadow: 0 2px 4px rgba(28, 178, 215, 0.1);
+  }
+
+  .professional-header {
+    background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--background)));
+    border-bottom: 1px solid hsl(var(--border));
+    backdrop-filter: blur(10px);
+  }
+
+  .tab-enhanced {
+    transition: all 0.2s ease;
+    border-radius: calc(var(--radius) - 2px);
+  }
+
+  .tab-enhanced:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(28, 178, 215, 0.15);
+  }
+
+  /* Animation classes */
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Transcription text styling */
+  .transcription-text {
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+}
